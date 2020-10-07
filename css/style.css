@@ -1,3 +1,28 @@
 h1 {
     color:red;
 }
+
+.game-grid {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    background-color: #2196F3;
+    padding 30px;
+
+}
+
+.box {
+    background-color: rgba(255, 255, 255, 0.8);
+    /* border: 10px solid rgba(0, 0, 0, 0.8); */
+    padding: 20px;
+    font-size: 30px;
+    text-align: center;
+    margin: 10px;
+  }
+
+  .x {
+      background-color: red;
+  }
+
+  .o {
+      background-color: green;
+  }
