@@ -1,10 +1,6 @@
 console.log("JS linked");
 
 let round = 1; 
-let currPlayer = '';
-
-
-
 
 
 
@@ -12,15 +8,13 @@ let currPlayer = '';
 const gameGrid = document.querySelector('.game-grid');
 const gameBox = document.querySelectorAll('.box');
 
+//TEMPORARY to toggle between players
+const player1 = document.querySelector('#p1');
+const player2 = document.querySelector('#p2');
+
 // console.log(gameGrid);
 // console.log(gameBox);
 
-
-
-//Determine winner
-function determineWinner() {
-    gameBox.forEach(item)
-}
 
 function boxAvailable(currBox) {
     if (currBox.classList.contains('x') || currBox.classList.contains('o')) {
@@ -46,19 +40,34 @@ gameGrid.addEventListener('click', (event) => {
                 // console.log("Box that was clicked "+ (index + 1));
                 // currItem.classList.add('x');
                 selectedBox = index+1;
-                //confirmBoxSelection (currItem, currPlayer.gameOperatorID);
                 if (boxAvailable(currItem)) {
+                    console.log (currPlayer);
                     currItem.classList.add(currPlayer.gameOperatorID.toLowerCase());
                     ttt.updateScore(currPlayer.gameOperatorID, selectedBox);
                 }
-                //keepScore(currPlayer.gameOperatorID, selectedBox);
             }
         })
     }
   });
 
- const p1 = new Player ('Paul','O');
- const ttt = new Game ('Tic Tac Toe');
- currPlayer = p1;
 
- console.log(ttt);
+  
+  const p1 = new Player ('me','X');
+  const p2 = new Player ('him','O');
+  const ttt = new Game ('Tic Tac Toe');
+  let currPlayer = p1;
+  
+  console.log(ttt);
+  
+  
+  player1.addEventListener('click', () => {
+      currPlayer = p1;
+      console.log('Current player is p1' + currPlayer);
+  });
+  
+  player2.addEventListener('click', () => {
+      currPlayer = p2;
+      console.log('Current player is p2' + currPlayer);
+  });
+
+
