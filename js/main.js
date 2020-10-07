@@ -3,24 +3,10 @@ console.log("JS linked");
 let round = 1; 
 let currPlayer = '';
 
-const gameTracker = {
-    col1: 0,
-    col2: 0,
-    col3: 0,
-    row1: 0,
-    row2: 0,
-    row3: 0,
-} 
 
 
-class Player {
-    constructor(name, gameOperatorID) {		
-        this.name = name; 									
-        this.gameOperatorID = gameOperatorID;
-        this.boxSelectionsHistory = [];
-        this.winner = false;
-    }
-};
+
+
 
 //Find the game grid and game boxes
 const gameGrid = document.querySelector('.game-grid');
@@ -28,111 +14,6 @@ const gameBox = document.querySelectorAll('.box');
 
 // console.log(gameGrid);
 // console.log(gameBox);
-
-function updateScore(playerID, box) {
-    console.log(`${playerID} ${box}`);
-    switch (box) {
-        case 1:
-            if (playerID === 'X') {
-                gameTracker.col1+=1;
-                gameTracker.row1+=1;
-            } else {
-                gameTracker.col1-=1;
-                gameTracker.row1-=1;
-            }
-            break;
-
-        case 2:
-            if (playerID === 'X') {
-                gameTracker.col2+=1;
-                gameTracker.row1+=1;
-            } else {
-                gameTracker.col2-=1;
-                gameTracker.row1-=1;
-            }   
-            break;
-    
-        case 3:
-            if (playerID === 'X') {
-                gameTracker.col3+=1;
-                gameTracker.row1+=1;
-            } else {
-                gameTracker.col3-=1;
-                gameTracker.row1-=1;
-            }   
-            break;
-
-
-        case 4:
-            if (playerID === 'X') {
-                gameTracker.col1+=1;
-                gameTracker.row2+=1;
-            } else {
-                gameTracker.col1-=1;
-                gameTracker.row2-=1;
-            }
-            break;
-
-        case 5:
-            if (playerID === 'X') {
-                gameTracker.col2+=1;
-                gameTracker.row2+=1;
-            } else {
-                gameTracker.col2-=1;
-                gameTracker.row2-=1;
-            }   
-            break;
-    
-        case 6:
-            if (playerID === 'X') {
-                gameTracker.col3+=1;
-                gameTracker.row2+=1;
-            } else {
-                gameTracker.col3-=1;
-                gameTracker.row2-=1;
-            }   
-            break;
-
-
-
-        case 7:
-            if (playerID === 'X') {
-                gameTracker.col1+=1;
-                gameTracker.row3+=1;
-            } else {
-                gameTracker.col1-=1;
-                gameTracker.row3-=1;
-            }
-            break;
-
-        case 8:
-            if (playerID === 'X') {
-                gameTracker.col2+=1;
-                gameTracker.row3+=1;
-            } else {
-                gameTracker.col2-=1;
-                gameTracker.row3-=1;
-            }   
-            break;
-    
-        case 9:
-            if (playerID === 'X') {
-                gameTracker.col3+=1;
-                gameTracker.row3+=1;
-            } else {
-                gameTracker.col3-=1;
-                gameTracker.row3-=1;
-            }   
-            break;
-
-
-        default:
-            break;
-    }
-    console.log(gameTracker);
-
-
-}
 
 
 
@@ -150,17 +31,6 @@ function boxAvailable(currBox) {
     }
 }
 
-/* DELETE IF NO LONGER NEEDED
-//This will determine if a box is open and allow user to select it
-function confirmBoxSelection (currBox, selectedBox, player) {
-    if (currBox.classList.contains('x') || currBox.classList.contains('o')) {
-        console.log('Box alreday selected.  Choose another');
-    } else {
-        currBox.classList.add(p1.gameOperatorID.toLowerCase());
-    }
-    
-}
-*/
 
 //Add an event listner to the game grid parent and take advantage of propagation 
 gameGrid.addEventListener('click', (event) => {
@@ -179,7 +49,7 @@ gameGrid.addEventListener('click', (event) => {
                 //confirmBoxSelection (currItem, currPlayer.gameOperatorID);
                 if (boxAvailable(currItem)) {
                     currItem.classList.add(currPlayer.gameOperatorID.toLowerCase());
-                    updateScore(currPlayer.gameOperatorID, selectedBox);
+                    ttt.updateScore(currPlayer.gameOperatorID, selectedBox);
                 }
                 //keepScore(currPlayer.gameOperatorID, selectedBox);
             }
@@ -188,4 +58,7 @@ gameGrid.addEventListener('click', (event) => {
   });
 
  const p1 = new Player ('Paul','O');
+ const ttt = new Game ('Tic Tac Toe');
  currPlayer = p1;
+
+ console.log(ttt);
