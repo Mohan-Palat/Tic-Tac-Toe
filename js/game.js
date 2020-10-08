@@ -11,6 +11,7 @@ class Game {
     }
 
     resetGame () {
+        this.currentPlayer = this.players[0];
         this.turn = 0;
         this.rowAndColTracker = [0,0,0,0,0,0];
         this.diagonalTracker = ['', '', '', '', ''];
