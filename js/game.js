@@ -53,11 +53,11 @@ class Game {
 
         //Winner has either a full row, column, or diagonal.  Game over
         if (this.rowAndColTracker.includes(3) || diagonalTrackerStr.includes('X|X|X')) {
-            this.winner = "Player 1";
+            this.winner = `${this.currentPlayer.name} is the winner!!!`;
             this.gameOn = false;
             
         } else if (this.rowAndColTracker.includes(-3) || diagonalTrackerStr.includes('O|O|O')) {
-            this.winner = "Player 2";
+            this.winner = `${this.currentPlayer.name} is the winner!!!`;
             this.gameOn = false;
         
         //Game is a draw if no winner at the end
@@ -186,17 +186,13 @@ class Game {
         //Incrememnt players turn
         this.turn++;
 
-        //Next player's turn
-        this.switchTurns();
-
         //Determine winner if 
         if (this.turn >= 5) {
             this.determineWinner();
         }
+
+        //Next player's turn
+        this.switchTurns();
         
     }
-    
-     
-    
-    
 };

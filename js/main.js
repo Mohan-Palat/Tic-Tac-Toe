@@ -31,10 +31,7 @@ gameGrid.addEventListener('click', (event) => {
         //Find out which one was clicked by spinning through box list
         gameBox.forEach((currItem, index) => {
             if (currItem === event.target) {
-                // console.log (event);
-                // console.log (currItem);
-                // console.log("Box that was clicked "+ (index + 1));
-                // currItem.classList.add('x');
+                
                 selectedBox = index+1;
 
                 //If user selected an open box and the game is still "on"
@@ -50,6 +47,10 @@ gameGrid.addEventListener('click', (event) => {
                     if (!ttt.gameOn) {
                         notificationBanner.innerHTML = ttt.winner;
                         newGameBtn.disabled = false;
+                    } else {
+                        //Otherwise, next player's turn
+                        notificationBanner.innerHTML = `${ttt.currentPlayer.name}'s turn`;
+                    
                     }
                 }
             }
@@ -59,8 +60,8 @@ gameGrid.addEventListener('click', (event) => {
 
 
   
-const p1 = new Player ('me','X');
-const p2 = new Player ('him','O');
+const p1 = new Player ('Player 1','X');
+const p2 = new Player ('Player 2','O');
 const ttt = new Game ('Tic Tac Toe');
 ttt.addPlayer(p1);
 ttt.addPlayer(p2);
@@ -81,7 +82,7 @@ newGameBtn.addEventListener('click', () => {
     });
 
     //Reset notification section to initial state
-    notificationBanner.innerHTML = '';
+    notificationBanner.innerHTML = `${ttt.currentPlayer.name}'s turn`;
 
     //Disable new game button
     newGameBtn.disabled = true;
