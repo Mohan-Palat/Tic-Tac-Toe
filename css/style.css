@@ -1,5 +1,13 @@
-h1 {
-    color:red;
+
+
+main {
+    display: flex;
+    flex-direction: column;
+}
+
+section {
+    font-size: 30px;
+    text-align: center;
 }
 
 .game-grid {
