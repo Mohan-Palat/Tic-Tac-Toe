@@ -2,29 +2,47 @@ class Game {
     constructor(name) {		
         this.name = name; 									
         this.players = [];
-        this.winner = '';
+        this.currentPlayer;
         this.turn = 0;
         this.gameOn = false;
         this.rowAndColTracker = [0,0,0,0,0,0];
         this.diagonalTracker = ['', '', '', '', ''];
+        this.winner = '';
     }
 
     resetGame () {
-        this.winner = '';
         this.turn = 0;
         this.rowAndColTracker = [0,0,0,0,0,0];
         this.diagonalTracker = ['', '', '', '', ''];
+        this.winner = '';
+    }
+
+    startNewGame () {               //MAYBE COMBINE WITH resetGame????
+        this.gameOn = true;
+        this.resetGame();
     }
 
     //This will add a player to the game
     addPlayer (player) {
         this.players.push(player);
+        
+        //If this is the first player, make him the "currentPlayer"
+        if (this.players.length === 1) {
+            
+            this.currentPlayer = player;
+        }
     }
+    
+    switchTurns () {
 
-    startNewGame () {
-        this.gameOn = true;
-        this.resetGame();
-    }
+        console.log(this.currentPlayer);
+        if (this.currentPlayer === this.players[0]) {
+            this.currentPlayer = this.players[1];
+        } else {
+            this.currentPlayer = this.players[0];
+        }
+        
+    };
 
     //This will determine the winner
     determineWinner () {
@@ -165,10 +183,11 @@ class Game {
                 break;
         }
         
-        // console.log(this.rowAndColTracker);
-        // console.log(this.diagonalTracker);
-
+        //Incrememnt players turn
         this.turn++;
+
+        //Next player's turn
+        this.switchTurns();
 
         //Determine winner if 
         if (this.turn >= 5) {

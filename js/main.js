@@ -11,13 +11,6 @@ const newGameBtn = document.querySelector('#newGame');
 //Find notification section 
 const notificationBanner = document.querySelector('#notification')
 
-//TEMPORARY to toggle between players
-const player1 = document.querySelector('#p1');
-const player2 = document.querySelector('#p2');
-
-// console.log(gameGrid);
-// console.log(gameBox);
-
 
 function boxAvailable(currBox) {
     if (currBox.classList.contains('x') || currBox.classList.contains('o')) {
@@ -43,10 +36,15 @@ gameGrid.addEventListener('click', (event) => {
                 // console.log("Box that was clicked "+ (index + 1));
                 // currItem.classList.add('x');
                 selectedBox = index+1;
+
+                //If user selected an open box and the game is still "on"
                 if (boxAvailable(currItem) && (ttt.gameOn)) {
-                    // console.log (currPlayer);
-                    currItem.classList.add(currPlayer.gameOperatorID.toLowerCase());
-                    ttt.updateScore(currPlayer.gameOperatorID, selectedBox);
+                    
+                    //Add a class to the box of either x or o 
+                    currItem.classList.add(ttt.currentPlayer.gameOperatorID.toLowerCase());
+
+                    //Update score
+                    ttt.updateScore(ttt.currentPlayer.gameOperatorID, selectedBox);
                     
                     //If the game is over, show result and enable new game button
                     if (!ttt.gameOn) {
@@ -68,20 +66,7 @@ ttt.addPlayer(p1);
 ttt.addPlayer(p2);
 console.log(ttt);
 
-let currPlayer = p1;
 
-
-//TEMPORARY
-player1.addEventListener('click', () => {
-    currPlayer = p1;
-    console.log('Current player is p1' + currPlayer);
-});
-
-//TEMPORARY
-player2.addEventListener('click', () => {
-    currPlayer = p2;
-    console.log('Current player is p2' + currPlayer);
-});
 
 //Begin a new game
 newGameBtn.addEventListener('click', () => {
@@ -94,6 +79,9 @@ newGameBtn.addEventListener('click', () => {
         currItem.classList.remove('x');
         currItem.classList.remove('o');
     });
+
+    //Reset notification section to initial state
+    notificationBanner.innerHTML = '';
 
     //Disable new game button
     newGameBtn.disabled = true;
