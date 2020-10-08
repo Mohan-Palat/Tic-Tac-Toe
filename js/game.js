@@ -3,94 +3,90 @@ class Game {
         this.name = name; 									
         this.players = [];
         this.winner = '';
-        this.round = 0;
-        this.scoreTracker = {
-            col1: 0,
-            col2: 0,
-            col3: 0,
-            row1: 0,
-            row2: 0,
-            row3: 0,
-        }
+        this.turn = 0;
+        this.gameOn = false;
+        this.rowAndColTracker = [0,0,0,0,0,0];
+        this.diagonalTracker = ['', '', '', '', ''];
     }
 
-    determineWinner () {
+    resetGame () {
+        this.winner = '';
+        this.turn = 0;
+        this.rowAndColTracker = [0,0,0,0,0,0];
+        this.diagonalTracker = ['', '', '', '', ''];
+    }
 
-        if (this.scoreTracker.col1 === 3 || this.scoreTracker.col2 === 3 || this.scoreTracker.col3 === 3 ||
-            this.scoreTracker.row1 === 3 || this.scoreTracker.row2 === 3 || this.scoreTracker.row3 === 3) {
-                this.winner = "player1";
-                console.log("Winner is " + this.winner);
-                console.log(this.scoreTracker);
-        } else if 
-            (this.scoreTracker.col1 === -3 || this.scoreTracker.col2 === -3 || this.scoreTracker.col3 === -3 ||
-            this.scoreTracker.row1 === -3 || this.scoreTracker.row2 === -3 || this.scoreTracker.row3 === -3) {
-                this.winner = "player2";
-                console.log("Winner is " + this.winner);
-                console.log(this.scoreTracker);
-        } else {
-            this.winner = "a draw";
-            console.log("Winner is " + this.winner);
-            console.log(this.scoreTracker);
+    //This will add a player to the game
+    addPlayer (player) {
+        this.players.push(player);
+    }
+
+    startNewGame () {
+        this.gameOn = true;
+        this.resetGame();
+    }
+
+    //This will determine the winner
+    determineWinner () {
+        
+        //Convert the diagonalTracker array into a string so it can be easily "inspected" for a winning pattern
+        const diagonalTrackerStr = this.diagonalTracker.join('|');
+        console.log(diagonalTrackerStr);
+
+        //Winner has either a full row, column, or diagonal.  Game over
+        if (this.rowAndColTracker.includes(3) || diagonalTrackerStr.includes('X|X|X')) {
+            this.winner = "Player 1";
+            this.gameOn = false;
+            
+        } else if (this.rowAndColTracker.includes(-3) || diagonalTrackerStr.includes('O|O|O')) {
+            this.winner = "Player 2";
+            this.gameOn = false;
+        
+        //Game is a draw if no winner at the end
+        } else if (this.turn === 9) {
+            this.winner = "Draw";
+            this.gameOn = false;
+
         }
 
+        console.log("Winner is " + this.winner);
 
-
-
-        // if (this.scoreTracker.col1 === 3 || this.scoreTracker.col2 === 3 || this.scoreTracker.col3 === 3 ||
-        //     this.scoreTracker.row1 === 3 || this.scoreTracker.row2 === 3 || this.scoreTracker.row3 === 3 ||) {
-        //         this.winner = "player1";
-        //     }
-
-
-        //     (this.scoreTracker.col1 === 1 && this.scoreTracker.col2 === 1 && this.scoreTracker.col3 === 1 &&
-        //     this.scoreTracker.row1 === 1 && this.scoreTracker.row2 === 1 && this.scoreTracker.row3 === 1)) {
-            
-                
-
-        // } else if 
-        //     (this.scoreTracker.col1 === -3 || this.scoreTracker.col2 === -3 || this.scoreTracker.col3 === -3 ||
-        //     this.scoreTracker.row1 === -3 || this.scoreTracker.row2 === -3 || this.scoreTracker.row3 === -3 ||) {
-        //         this.winner = "player2";
-        //     }
-
-
-        //     (this.scoreTracker.col1 === -1 && this.scoreTracker.col2 === -1 && this.scoreTracker.col3 === -1 &&
-        //     this.scoreTracker.row1 === -1 && this.scoreTracker.row2 === -1 && this.scoreTracker.row3 === -1)) {
-            
-                
-        // }
     }
 
     updateScore (playerID, box) {
-        //console.log(`${playerID} ${box}`);
+        console.log(`${playerID} ${box}`);
         switch (box) {
             case 1:
                 if (playerID === 'X') {
-                    this.scoreTracker.col1+=1;
-                    this.scoreTracker.row1+=1;
+                    this.rowAndColTracker[0]+=1;
+                    this.rowAndColTracker[3]+=1;
+                    this.diagonalTracker[0]='X';
                 } else {
-                    this.scoreTracker.col1-=1;
-                    this.scoreTracker.row1-=1;
+                    this.rowAndColTracker[0]-=1;
+                    this.rowAndColTracker[3]-=1;
+                    this.diagonalTracker[0]='O';
                 }
                 break;
     
             case 2:
                 if (playerID === 'X') {
-                    this.scoreTracker.col2+=1;
-                    this.scoreTracker.row1+=1;
+                    this.rowAndColTracker[1]+=1;
+                    this.rowAndColTracker[3]+=1;
                 } else {
-                    this.scoreTracker.col2-=1;
-                    this.scoreTracker.row1-=1;
+                    this.rowAndColTracker[1]-=1
+                    this.rowAndColTracker[3]-=1;
                 }   
                 break;
         
             case 3:
                 if (playerID === 'X') {
-                    this.scoreTracker.col3+=1;
-                    this.scoreTracker.row1+=1;
+                    this.rowAndColTracker[2]+=1;
+                    this.rowAndColTracker[3]+=1;
+                    this.diagonalTracker[3]='X';
                 } else {
-                    this.scoreTracker.col3-=1;
-                    this.scoreTracker.row1-=1;
+                    this.rowAndColTracker[2]-=1
+                    this.rowAndColTracker[3]-=1;
+                    this.diagonalTracker[3]='O';
                 }   
                 break;
     
@@ -98,31 +94,33 @@ class Game {
 
             case 4:
                 if (playerID === 'X') {
-                    this.scoreTracker.col1+=1;
-                    this.scoreTracker.row2+=1;
+                    this.rowAndColTracker[0]+=1;
+                    this.rowAndColTracker[4]+=1;
                 } else {
-                    this.scoreTracker.col1-=1;
-                    this.scoreTracker.row2-=1;
+                    this.rowAndColTracker[0]-=1;
+                    this.rowAndColTracker[4]-=1;
                 }
                 break;
     
             case 5:
                 if (playerID === 'X') {
-                    this.scoreTracker.col2+=1;
-                    this.scoreTracker.row2+=1;
+                    this.rowAndColTracker[1]+=1;
+                    this.rowAndColTracker[4]+=1;
+                    this.diagonalTracker[2]='X';
                 } else {
-                    this.scoreTracker.col2-=1;
-                    this.scoreTracker.row2-=1;
+                    this.rowAndColTracker[1]-=1;
+                    this.rowAndColTracker[4]-=1;
+                    this.diagonalTracker[2]='O';
                 }   
                 break;
         
             case 6:
                 if (playerID === 'X') {
-                    this.scoreTracker.col3+=1;
-                    this.scoreTracker.row2+=1;
+                    this.rowAndColTracker[2]+=1;
+                    this.rowAndColTracker[4]+=1;
                 } else {
-                    this.scoreTracker.col3-=1;
-                    this.scoreTracker.row2-=1;
+                    this.rowAndColTracker[2]-=1;
+                    this.rowAndColTracker[4]-=1;
                 }   
                 break;
     
@@ -130,31 +128,35 @@ class Game {
     
             case 7:
                 if (playerID === 'X') {
-                    this.scoreTracker.col1+=1;
-                    this.scoreTracker.row3+=1;
+                    this.rowAndColTracker[0]+=1;
+                    this.rowAndColTracker[5]+=1;
+                    this.diagonalTracker[4]='X';
                 } else {
-                    this.scoreTracker.col1-=1;
-                    this.scoreTracker.row3-=1;
+                    this.rowAndColTracker[0]-=1;
+                    this.rowAndColTracker[5]-=1;
+                    this.diagonalTracker[4]='O';
                 }
                 break;
     
             case 8:
                 if (playerID === 'X') {
-                    this.scoreTracker.col2+=1;
-                    this.scoreTracker.row3+=1;
+                    this.rowAndColTracker[1]+=1;
+                    this.rowAndColTracker[5]+=1;
                 } else {
-                    this.scoreTracker.col2-=1;
-                    this.scoreTracker.row3-=1;
+                    this.rowAndColTracker[1]-=1;
+                    this.rowAndColTracker[5]-=1;
                 }   
                 break;
         
             case 9:
                 if (playerID === 'X') {
-                    this.scoreTracker.col3+=1;
-                    this.scoreTracker.row3+=1;
+                    this.rowAndColTracker[2]+=1;
+                    this.rowAndColTracker[5]+=1;
+                    this.diagonalTracker[1]='X';
                 } else {
-                    this.scoreTracker.col3-=1;
-                    this.scoreTracker.row3-=1;
+                    this.rowAndColTracker[2]-=1;
+                    this.rowAndColTracker[5]-=1;
+                    this.diagonalTracker[1]='O';
                 }   
                 break;
     
@@ -163,10 +165,13 @@ class Game {
                 break;
         }
         
-        this.round++;
+        // console.log(this.rowAndColTracker);
+        // console.log(this.diagonalTracker);
 
-        //Determine winner
-        if (this.round >= 5) {
+        this.turn++;
+
+        //Determine winner if 
+        if (this.turn >= 5) {
             this.determineWinner();
         }
         

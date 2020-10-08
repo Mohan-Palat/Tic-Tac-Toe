@@ -1,12 +1,15 @@
 console.log("JS linked");
 
-let round = 1; 
-
-
 
 //Find the game grid and game boxes
 const gameGrid = document.querySelector('.game-grid');
 const gameBox = document.querySelectorAll('.box');
+
+//Find 'new game' button
+const newGameBtn = document.querySelector('#newGame');
+
+//Find notification section 
+const notificationBanner = document.querySelector('#notification')
 
 //TEMPORARY to toggle between players
 const player1 = document.querySelector('#p1');
@@ -40,34 +43,61 @@ gameGrid.addEventListener('click', (event) => {
                 // console.log("Box that was clicked "+ (index + 1));
                 // currItem.classList.add('x');
                 selectedBox = index+1;
-                if (boxAvailable(currItem)) {
-                    console.log (currPlayer);
+                if (boxAvailable(currItem) && (ttt.gameOn)) {
+                    // console.log (currPlayer);
                     currItem.classList.add(currPlayer.gameOperatorID.toLowerCase());
                     ttt.updateScore(currPlayer.gameOperatorID, selectedBox);
+                    
+                    //If the game is over, show result and enable new game button
+                    if (!ttt.gameOn) {
+                        notificationBanner.innerHTML = ttt.winner;
+                        newGameBtn.disabled = false;
+                    }
                 }
             }
         })
     }
-  });
+});
 
 
   
-  const p1 = new Player ('me','X');
-  const p2 = new Player ('him','O');
-  const ttt = new Game ('Tic Tac Toe');
-  let currPlayer = p1;
-  
-  console.log(ttt);
-  
-  
-  player1.addEventListener('click', () => {
-      currPlayer = p1;
-      console.log('Current player is p1' + currPlayer);
-  });
-  
-  player2.addEventListener('click', () => {
-      currPlayer = p2;
-      console.log('Current player is p2' + currPlayer);
-  });
+const p1 = new Player ('me','X');
+const p2 = new Player ('him','O');
+const ttt = new Game ('Tic Tac Toe');
+ttt.addPlayer(p1);
+ttt.addPlayer(p2);
+console.log(ttt);
+
+let currPlayer = p1;
+
+
+//TEMPORARY
+player1.addEventListener('click', () => {
+    currPlayer = p1;
+    console.log('Current player is p1' + currPlayer);
+});
+
+//TEMPORARY
+player2.addEventListener('click', () => {
+    currPlayer = p2;
+    console.log('Current player is p2' + currPlayer);
+});
+
+//Begin a new game
+newGameBtn.addEventListener('click', () => {
+    
+    //Initialize current game instance 
+    ttt.startNewGame();  
+    
+    //Reset game grid to initial state
+    gameBox.forEach((currItem, index) => {
+        currItem.classList.remove('x');
+        currItem.classList.remove('o');
+    });
+
+    //Disable new game button
+    newGameBtn.disabled = true;
+});
+
 
 
