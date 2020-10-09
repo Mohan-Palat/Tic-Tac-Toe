@@ -2,6 +2,7 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    font-family: 'Heebo', sans-serif;
 }
 
 header {
@@ -13,17 +14,30 @@ main {
     display: flex;
 }
 
+h2 {
+    padding-left: 40px;
+    background-color: rgb(133, 186, 211);
+}
+
 aside {
     width: 500px;
     background-color: lightgray;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
+    padding-left: 20px;
+
 }
 
 section {
     font-size: 30px;
     text-align: center;
+}
+
+ul {
+    list-style-type: none; 
+    padding: 0; 
+    margin: 0; 
 }
 
 .game-grid {
@@ -37,9 +51,6 @@ section {
 
 }
 
-#notification {
-    margin-top: 50px;
-}
 
 .box {
     background-color: white;
@@ -68,14 +79,14 @@ section {
     margin-bottom: 0;
 }
 
-.previous-results {
+/* .previous-results {
     list-style-type: none; 
     padding: 0; 
     margin: 0; 
-}
+} */
 
 .result {   /*JS creation*/
-    font-size: 30px;
+    font-size: 20px;
 }
 
 .x {
@@ -84,4 +95,13 @@ section {
 
 .o {
       /* background-color: green; */
+}
+
+#notification {
+    margin-top: 10px;
+    font-size: 40px;
+}
+
+#new-game {
+    width: 100px;
 }

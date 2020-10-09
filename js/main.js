@@ -6,7 +6,7 @@ const gameGrid = document.querySelector('.game-grid');
 const gameBox = document.querySelectorAll('.box');
 
 //Find 'new game' button
-const newGameBtn = document.querySelector('#newGame');
+const newGameBtn = document.querySelector('#new-game');
 
 //Find notification section 
 const notificationBanner = document.querySelector('#notification');
@@ -14,7 +14,8 @@ const notificationBanner = document.querySelector('#notification');
 //Find previous results list
 const prevResults = document.querySelector('.previous-results');
 
-
+//Find player character selection
+const p1CustomChar = document.querySelector('#p1-char');
 
 
 function populatePrevResults() {
@@ -38,6 +39,10 @@ function populatePrevResults() {
     };
 }
 
+function populateCounters(){
+
+}
+
 
 function boxAvailable(currBox) {
     if (currBox.classList.contains('x') || currBox.classList.contains('o')) {
@@ -51,7 +56,6 @@ function boxAvailable(currBox) {
 
 //Add an event listner to the game grid parent and take advantage of propagation 
 gameGrid.addEventListener('click', (event) => {
-    
     //If the user clicked a game box 
     if (event.target.classList[0] === 'box') {
         
@@ -65,7 +69,11 @@ gameGrid.addEventListener('click', (event) => {
                 if (boxAvailable(currItem) && (ttt.gameOn)) {
                     
                     //Update the box with X, O, or whatever they choose as their ID icon
-                    currItem.innerHTML = ttt.currentPlayer.gameOperatorID;
+                    if (ttt.currentPlayer.customIcon !== undefined) {
+                        currItem.innerHTML = ttt.currentPlayer.customIcon;
+                    } else {
+                        currItem.innerHTML = ttt.currentPlayer.gameOperatorID;
+                    }
                     
                     //Add a class to the box of either x or o 
                     currItem.classList.add(ttt.currentPlayer.gameOperatorID.toLowerCase());
@@ -89,20 +97,15 @@ gameGrid.addEventListener('click', (event) => {
     }
 });
 
-
-  
-const p1 = new Player ('Player 1','X');
-const p2 = new Player ('Player 2','O');
+const p1 = new Player ('Player 1', 'X');
+const p2 = new Player ('Player 2', 'O');
 const ttt = new Game ('Tic Tac Toe');
 ttt.addPlayer(p1);
 ttt.addPlayer(p2);
-// console.log(ttt);
-
-
 
 //Begin a new game
 newGameBtn.addEventListener('click', () => {
-    
+
     //Initialize current game instance 
     ttt.startNewGame();  
     
