@@ -1,7 +1,15 @@
 class Player {
-    constructor(name, gameOperatorID, customIcon) {		
+    constructor(name, gameOperatorID) {		
         this.name = name; 									
         this.gameOperatorID = gameOperatorID;
-        this.customIcon = customIcon;
+        this.customOperatorID;
+    }
+
+    updateName (newName) {
+        this.name = newName;
+    }
+
+    updateCustOperID (newCustOperID) {
+        this.customOperatorID = newCustOperID.toUpperCase();
     }
 };

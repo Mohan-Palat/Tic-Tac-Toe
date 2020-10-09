@@ -18,6 +18,18 @@ const prevResults = document.querySelector('.previous-results');
 const p1CustomChar = document.querySelector('#p1-char');
 
 
+//Enable input fields and buttons so user can interact with UI
+function enableFieldsAndButtons() {
+    newGameBtn.disabled = false;
+    p1CustomChar.disabled = false;
+}
+
+//Disable input fields and buttons
+function disbaleFieldsAndButtons() {
+    newGameBtn.disabled = true;
+    p1CustomChar.disabled = true;
+}
+
 function populatePrevResults() {
     
     //Create a new li node
@@ -40,7 +52,7 @@ function populatePrevResults() {
 }
 
 function populateCounters(){
-
+    
 }
 
 
@@ -69,8 +81,8 @@ gameGrid.addEventListener('click', (event) => {
                 if (boxAvailable(currItem) && (ttt.gameOn)) {
                     
                     //Update the box with X, O, or whatever they choose as their ID icon
-                    if (ttt.currentPlayer.customIcon !== undefined) {
-                        currItem.innerHTML = ttt.currentPlayer.customIcon;
+                    if (ttt.currentPlayer.customOperatorID !== undefined) {
+                        currItem.innerHTML = ttt.currentPlayer.customOperatorID;
                     } else {
                         currItem.innerHTML = ttt.currentPlayer.gameOperatorID;
                     }
@@ -81,11 +93,11 @@ gameGrid.addEventListener('click', (event) => {
                     //Update score
                     ttt.updateScore(ttt.currentPlayer.gameOperatorID, selectedBox);
                     
-                    //If the game is over, show result and enable new game button
+                    //If the game is over, show result and enable buttons and input fields
                     if (!ttt.gameOn) {
                         notificationBanner.innerHTML = ttt.winner;
-                        newGameBtn.disabled = false;
                         populatePrevResults();
+                        enableFieldsAndButtons();
                     } else {
                         //Otherwise, next player's turn
                         notificationBanner.innerHTML = `${ttt.currentPlayer.name}'s turn`;
@@ -97,17 +109,16 @@ gameGrid.addEventListener('click', (event) => {
     }
 });
 
-const p1 = new Player ('Player 1', 'X');
-const p2 = new Player ('Player 2', 'O');
-const ttt = new Game ('Tic Tac Toe');
-ttt.addPlayer(p1);
-ttt.addPlayer(p2);
 
 //Begin a new game
 newGameBtn.addEventListener('click', () => {
-
+    
     //Initialize current game instance 
     ttt.startNewGame();  
+    
+    if (p1CustomChar !== undefined) {
+        p1.updateCustOperID(p1CustomChar.value);
+    }
     
     //Reset game grid to initial state
     gameBox.forEach((currItem, index) => {
@@ -115,13 +126,18 @@ newGameBtn.addEventListener('click', () => {
         currItem.classList.remove('x');
         currItem.classList.remove('o');
     });
-
+    
     //Reset notification section to initial state
     notificationBanner.innerHTML = `${ttt.currentPlayer.name}'s turn`;
-
-    //Disable new game button
-    newGameBtn.disabled = true;
+    
+    //Disable game buttons and input fields while game is running
+    disbaleFieldsAndButtons();
 });
 
+const p1 = new Player ('Player 1', 'X');
+const p2 = new Player ('Player 2', 'O');
+const ttt = new Game ('Tic Tac Toe');
+ttt.addPlayer(p1);
+ttt.addPlayer(p2);
 
 
