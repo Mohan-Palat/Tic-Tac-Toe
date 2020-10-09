@@ -106,6 +106,7 @@ ul {
     width: 100px;
 }
 
-#p1-char {
+#p1-char, #p2-char{
     text-transform: uppercase;
+    width: 10px;
 }

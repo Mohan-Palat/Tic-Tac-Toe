@@ -14,8 +14,11 @@ const notificationBanner = document.querySelector('#notification');
 //Find previous results list
 const prevResults = document.querySelector('.previous-results');
 
-//Find player character selection
+//Find player customized inputs
 const p1CustomChar = document.querySelector('#p1-char');
+const p1Name = document.querySelector('#p1-name');
+const p2CustomChar = document.querySelector('#p2-char');
+const p2Name = document.querySelector('#p2-name');
 
 
 //Enable input fields and buttons so user can interact with UI
@@ -119,6 +122,16 @@ newGameBtn.addEventListener('click', () => {
     if (p1CustomChar !== undefined) {
         p1.updateCustOperID(p1CustomChar.value);
     }
+    if (p2CustomChar !== undefined) {
+        p2.updateCustOperID(p2CustomChar.value);
+    }
+    
+    if (p1Name !== undefined) {
+        p1.updateName(p1Name.value);
+    }
+    if (p2Name !== undefined) {
+        p2.updateName(p2Name.value);
+    }
     
     //Reset game grid to initial state
     gameBox.forEach((currItem, index) => {
@@ -128,7 +141,7 @@ newGameBtn.addEventListener('click', () => {
     });
     
     //Reset notification section to initial state
-    notificationBanner.innerHTML = `${ttt.currentPlayer.name}'s turn`;
+    notificationBanner.innerHTML = `Press New Game to Start`;
     
     //Disable game buttons and input fields while game is running
     disbaleFieldsAndButtons();
