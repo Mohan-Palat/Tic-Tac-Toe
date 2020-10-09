@@ -14,7 +14,11 @@ main {
 }
 
 aside {
-    width: 450px;
+    width: 500px;
+    background-color: lightgray;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
 }
 
 section {
@@ -64,10 +68,20 @@ section {
     margin-bottom: 0;
 }
 
-  .x {
-      /* background-color: red; */
-  }
+.previous-results {
+    list-style-type: none; 
+    padding: 0; 
+    margin: 0; 
+}
 
-  .o {
+.result {   /*JS creation*/
+    font-size: 30px;
+}
+
+.x {
+      /* background-color: red; */
+}
+
+.o {
       /* background-color: green; */
-  }
+}

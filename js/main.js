@@ -9,7 +9,34 @@ const gameBox = document.querySelectorAll('.box');
 const newGameBtn = document.querySelector('#newGame');
 
 //Find notification section 
-const notificationBanner = document.querySelector('#notification')
+const notificationBanner = document.querySelector('#notification');
+
+//Find previous results list
+const prevResults = document.querySelector('.previous-results');
+
+
+
+
+function populatePrevResults() {
+    
+    //Create a new li node
+    const newResultsNode = document.createElement("li");
+    
+    //Value the contents of the li
+    newResultsNode.innerHTML =  `Game ${ttt.gameCounter}:   ${ttt.players[0].name} vs ${ttt.players[1].name}  -> ${ttt.winner}`;
+
+    //Set the class of the li
+    newResultsNode.className = "result";
+    
+    //Append the most recent game results to the top of the list
+    prevResults.insertBefore(newResultsNode, prevResults.firstChild);    
+    
+    //Only allow 10 previous game rows so remove the oldest
+    if (prevResults.childElementCount >= 5) {    
+        console.log("in remove logic" + prevResults.lastChild);
+        prevResults.removeChild(prevResults.lastChild);
+    };
+}
 
 
 function boxAvailable(currBox) {
@@ -50,6 +77,7 @@ gameGrid.addEventListener('click', (event) => {
                     if (!ttt.gameOn) {
                         notificationBanner.innerHTML = ttt.winner;
                         newGameBtn.disabled = false;
+                        populatePrevResults();
                     } else {
                         //Otherwise, next player's turn
                         notificationBanner.innerHTML = `${ttt.currentPlayer.name}'s turn`;
@@ -68,7 +96,7 @@ const p2 = new Player ('Player 2','O');
 const ttt = new Game ('Tic Tac Toe');
 ttt.addPlayer(p1);
 ttt.addPlayer(p2);
-console.log(ttt);
+// console.log(ttt);
 
 
 

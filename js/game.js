@@ -1,13 +1,15 @@
 class Game {
     constructor(name) {		
-        this.name = name; 									
+        this.name = name;
+        this.gameCounter = 0; 									
         this.players = [];
         this.currentPlayer;
         this.turn = 0;
         this.gameOn = false;
         this.rowAndColTracker = [0,0,0,0,0,0];
-        this.diagonalTracker = ['', '', '', '', ''];
+        this.diagonalTracker = ['', '', '', '~', '', '', ''];
         this.winner = '';
+        this.previousGameResults = [];
     }
 
     resetGame () {
@@ -16,6 +18,7 @@ class Game {
         this.rowAndColTracker = [0,0,0,0,0,0];
         this.diagonalTracker = ['', '', '', '~', '', '', ''];
         this.winner = '';
+        this.gameCounter++;
     }
 
     startNewGame () {               //MAYBE COMBINE WITH resetGame????
@@ -35,8 +38,6 @@ class Game {
     }
     
     switchTurns () {
-
-        console.log(this.currentPlayer);
         if (this.currentPlayer === this.players[0]) {
             this.currentPlayer = this.players[1];
         } else {
@@ -50,30 +51,28 @@ class Game {
         
         //Convert the diagonalTracker array into a string so it can be easily "inspected" for a winning pattern
         const diagonalTrackerStr = this.diagonalTracker.join('|');
-        console.log(diagonalTrackerStr);
+        // console.log(diagonalTrackerStr);
 
         //Winner has either a full row, column, or diagonal.  Game over
-        if (this.rowAndColTracker.includes(3) || diagonalTrackerStr.includes('X|X|X')) {
-            this.winner = `${this.currentPlayer.name} is the winner!!!`;
-            this.gameOn = false;
+        if ((this.rowAndColTracker.includes(3) || diagonalTrackerStr.includes('X|X|X')) ||
+            (this.rowAndColTracker.includes(-3) || diagonalTrackerStr.includes('O|O|O'))) {
             
-        } else if (this.rowAndColTracker.includes(-3) || diagonalTrackerStr.includes('O|O|O')) {
-            this.winner = `${this.currentPlayer.name} is the winner!!!`;
+            this.winner = `${this.currentPlayer.name} won!!`;
             this.gameOn = false;
+            this.previousGameResults.push(this.players);
+            // console.log("prev results array ");
+            // console.log(this.previousGameResults);
         
         //Game is a draw if no winner at the end
         } else if (this.turn === 9) {
             this.winner = "Draw";
             this.gameOn = false;
+            this.previousGameResults.push([this.players, this.winner]);
 
         }
-
-        console.log("Winner is " + this.winner);
-
     }
 
     updateScore (playerID, box) {
-        console.log(`${playerID} ${box}`);
         switch (box) {
             case 1:
                 if (playerID === 'X') {
@@ -185,8 +184,6 @@ class Game {
             default:
                 break;
         }
-        
-        console.log(this.diagonalTracker);
 
         //Incrememnt players turn
         this.turn++;
