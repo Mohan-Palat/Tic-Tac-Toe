@@ -29,7 +29,7 @@ section {
     /* padding: 30px; */
     width: 600px;
     height: 600px;
-    margin: 100px;
+    margin: 50px;
 
 }
 
@@ -38,12 +38,14 @@ section {
 }
 
 .box {
-    background-color: rgba(255, 255, 255, 0.8);
+    background-color: white;
     /* border: 10px solid rgba(0, 0, 0, 0.8); */
-    padding: 20px;
-    font-size: 30px;
+    /* padding: 25px 0 0 0; */
+    font-size: 150px;
     text-align: center;
-    line-height: 100px; 
+    width: 194px;
+    height: 194px;
+    /* line-height: 100px;  */
   }
 
 .left {
@@ -63,9 +65,9 @@ section {
 }
 
   .x {
-      background-color: red;
+      /* background-color: red; */
   }
 
   .o {
-      background-color: green;
+      /* background-color: green; */
   }

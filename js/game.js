@@ -14,7 +14,7 @@ class Game {
         this.currentPlayer = this.players[0];
         this.turn = 0;
         this.rowAndColTracker = [0,0,0,0,0,0];
-        this.diagonalTracker = ['', '', '', '', ''];
+        this.diagonalTracker = ['', '', '', '~', '', '', ''];
         this.winner = '';
     }
 
@@ -101,11 +101,11 @@ class Game {
                 if (playerID === 'X') {
                     this.rowAndColTracker[2]+=1;
                     this.rowAndColTracker[3]+=1;
-                    this.diagonalTracker[3]='X';
+                    this.diagonalTracker[4]='X';
                 } else {
                     this.rowAndColTracker[2]-=1
                     this.rowAndColTracker[3]-=1;
-                    this.diagonalTracker[3]='O';
+                    this.diagonalTracker[4]='O';
                 }   
                 break;
     
@@ -126,10 +126,12 @@ class Game {
                     this.rowAndColTracker[1]+=1;
                     this.rowAndColTracker[4]+=1;
                     this.diagonalTracker[2]='X';
+                    this.diagonalTracker[6]='X';
                 } else {
                     this.rowAndColTracker[1]-=1;
                     this.rowAndColTracker[4]-=1;
                     this.diagonalTracker[2]='O';
+                    this.diagonalTracker[6]='O';
                 }   
                 break;
         
@@ -149,11 +151,11 @@ class Game {
                 if (playerID === 'X') {
                     this.rowAndColTracker[0]+=1;
                     this.rowAndColTracker[5]+=1;
-                    this.diagonalTracker[4]='X';
+                    this.diagonalTracker[5]='X';
                 } else {
                     this.rowAndColTracker[0]-=1;
                     this.rowAndColTracker[5]-=1;
-                    this.diagonalTracker[4]='O';
+                    this.diagonalTracker[5]='O';
                 }
                 break;
     
@@ -184,6 +186,8 @@ class Game {
                 break;
         }
         
+        console.log(this.diagonalTracker);
+
         //Incrememnt players turn
         this.turn++;
 

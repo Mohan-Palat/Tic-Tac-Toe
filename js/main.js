@@ -14,7 +14,7 @@ const notificationBanner = document.querySelector('#notification')
 
 function boxAvailable(currBox) {
     if (currBox.classList.contains('x') || currBox.classList.contains('o')) {
-        console.log('Box alreday selected.  Choose another');
+        // console.log('Box alreday selected.  Choose another');
         return false;
     } else {
         return true;
@@ -36,6 +36,9 @@ gameGrid.addEventListener('click', (event) => {
 
                 //If user selected an open box and the game is still "on"
                 if (boxAvailable(currItem) && (ttt.gameOn)) {
+                    
+                    //Update the box with X, O, or whatever they choose as their ID icon
+                    currItem.innerHTML = ttt.currentPlayer.gameOperatorID;
                     
                     //Add a class to the box of either x or o 
                     currItem.classList.add(ttt.currentPlayer.gameOperatorID.toLowerCase());
@@ -77,6 +80,7 @@ newGameBtn.addEventListener('click', () => {
     
     //Reset game grid to initial state
     gameBox.forEach((currItem, index) => {
+        currItem.innerHTML = '';
         currItem.classList.remove('x');
         currItem.classList.remove('o');
     });
