@@ -39,7 +39,7 @@ function populatePrevResults() {
     const newResultsNode = document.createElement("li");
     
     //Value the contents of the li
-    newResultsNode.innerHTML =  `Game ${ttt.gameCounter}:   ${ttt.players[0].name} vs ${ttt.players[1].name}  -> ${ttt.winner}`;
+    newResultsNode.innerHTML =  `Game ${ttt.gameCounter}:   ${ttt.players[0].customOperatorID} vs ${ttt.players[1].customOperatorID}  -> ${ttt.winner}`;
 
     //Set the class of the li
     newResultsNode.className = "result";
@@ -52,10 +52,6 @@ function populatePrevResults() {
         console.log("in remove logic" + prevResults.lastChild);
         prevResults.removeChild(prevResults.lastChild);
     };
-}
-
-function populateCounters(){
-    
 }
 
 
@@ -92,6 +88,8 @@ gameGrid.addEventListener('click', (event) => {
                     
                     //Add a class to the box of either x or o 
                     currItem.classList.add(ttt.currentPlayer.gameOperatorID.toLowerCase());
+
+                    currItem.classList.add('xFlicker');
 
                     //Update score
                     ttt.updateScore(ttt.currentPlayer.gameOperatorID, selectedBox);
@@ -139,6 +137,9 @@ newGameBtn.addEventListener('click', () => {
         currItem.classList.remove('x');
         currItem.classList.remove('o');
     });
+
+    //"turn on" game grid by adding animation class
+    gameGrid.classList.add('turned-on');
     
     //Reset notification section to initial state
     notificationBanner.innerHTML = `Press New Game to Start`;

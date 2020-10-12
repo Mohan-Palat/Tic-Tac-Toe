@@ -5,34 +5,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tic Tac Toe</title>
     <link href="https://fonts.googleapis.com/css2?family=Heebo&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@1,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Warnes&display=swap" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
 </head>
 <body>
-    <header>Tic Tac Toe</header>
+    <header>Neon Tic Tac Toe</header>
     <main>
         <aside>
             <div>
                 <label for="p1-name">Player 1 name</label>
                 <input type="text" id="p1-name" maxlength="15" value="Player 1"><br>
                 <label for="p1-char">Player 1 character</label>
-                <input type="text" id="p1-char" maxlength="1" value="X">
+                <input type="text" id="p1-char" maxlength="10" value="X">
             </div>
             <div>
                 <label for="p2-name">Player 2 name</label>
                 <input type="text" id="p2-name" maxlength="15" value="Player 2"><br>
                 <label for="p2-char">Player 2 character</label>
-                <input type="text" id="p2-char" maxlength="1" value="O">
+                <input type="text" id="p2-char" maxlength="10" value="O">
             </div>
             
-            <button class="btn" id="new-game">New Game</button>
+            <button class="btn" id="new-game">Play!</button>
             <div id="notification">Press New Game to Start</div>
             <div class="statistics">
-                <h2>Counters</h2>
+                <!-- <h2>Counters</h2>
                 <div class="counters">
                     <div class="Wins">Wins: </div>
                     <div class="Loses">Loses: </div>
                     <div class="Draws">Draws: </div>
-                </div>
+                </div> -->
                 <h2>Previous Game Results</h2>
                 <ul class="previous-results">
                 </ul>

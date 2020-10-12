@@ -57,7 +57,7 @@ class Game {
         if ((this.rowAndColTracker.includes(3) || diagonalTrackerStr.includes('X|X|X')) ||
             (this.rowAndColTracker.includes(-3) || diagonalTrackerStr.includes('O|O|O'))) {
             
-            this.winner = `${this.currentPlayer.name} won!!`;
+            this.winner = `${this.currentPlayer.customOperatorID} won!!`;
             this.gameOn = false;
             this.previousGameResults.push(this.players);
             // console.log("prev results array ");
