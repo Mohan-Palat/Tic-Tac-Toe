@@ -36,7 +36,97 @@ function disbaleFieldsAndButtons() {
     p1CustomChar.disabled = true;
 }
 
-//This will kepp track of previous game results
+//This will "turn off" all other X and Os to highlight the winning move.
+function highlightWinPattern (x, y, z) {
+    gameBox.forEach((currItem, index) => {
+        if (index !== x  && index !== y && index !== z) {
+            currItem.classList.add("fade");
+        }
+    });
+
+    //Turn off game grid too
+    gameGrid.classList.remove('turn-on');
+};
+
+//Show the pattern that won
+function showWinningMove () {
+    
+    //If winning pattern is either a row or column
+    if (ttt.rowAndColTracker.includes(3) || ttt.rowAndColTracker.includes(-3)) {
+        
+        let winPatternNotFound = true;
+        let index = 0;
+
+        //Spin throught the row/col array to determine which one was the winning pattern.  Once found, call function to highlight pattern.
+        while (winPatternNotFound) {
+            if (Math.abs(ttt.rowAndColTracker[index]) === 3) {
+                
+                switch (index) {
+                    case 0: 
+                        highlightWinPattern (0, 3, 6);
+                        break;
+                    
+                    case 1:
+                        highlightWinPattern (1, 4, 7);
+                        break;
+                    
+                    case 2:
+                        highlightWinPattern (2, 5, 8);
+                        break;
+        
+                    case 3:
+                        highlightWinPattern (0, 1, 2);
+                        break;
+        
+                    case 4:
+                        highlightWinPattern (3, 4, 5);
+                        break;
+        
+                    case 5:
+                        highlightWinPattern (6, 7, 8);
+                        break;
+                
+                    default:
+                        break;
+                }
+                winPatternNotFound = false;
+            } else {
+                index++;
+            }
+        }
+    //Winning pattern is diagonal
+    } else {
+
+        //Convert the diagonalTracker array into a string so it can be easily "inspected" for a winning pattern
+        const diagonalTrackerStr = ttt.diagonalTracker.join('|');
+
+        //Get the first half of the string
+        const diagLeftToRight = diagonalTrackerStr.substring (0, 5);
+
+        //Get the last half of the string
+        const diagRightToLeft = diagonalTrackerStr.substring (diagonalTrackerStr.length, diagonalTrackerStr.length-5);
+
+        if (diagLeftToRight === 'X|X|X' || diagLeftToRight === 'O|O|O') {
+            highlightWinPattern (0, 4, 8);
+        } else if (diagRightToLeft === 'X|X|X' || diagRightToLeft === 'O|O|O') {
+            highlightWinPattern (2, 4, 6);
+        
+        //Otherwise, it's a draw so turn off the entire board
+        } else {
+            
+            gameBox.forEach((currItem, index) => {
+                currItem.classList.add("fade");
+            });
+        
+            //Turn off game grid too
+            gameGrid.classList.remove('turn-on');
+
+        }
+
+    }
+};
+
+//This will keep track of previous game results
 function populatePrevResults() {
     
     //Create a new li node
@@ -93,7 +183,7 @@ gameGrid.addEventListener('click', (event) => {
                     //Add a class to the box of either x or o 
                     currItem.classList.add(ttt.currentPlayer.gameOperatorID.toLowerCase());
 
-                    currItem.classList.add('xFlicker');
+                    currItem.classList.add('xFlicker');  //THIS CAN BE REMOVED ALSO REMOVE FROM CSS
                     xoSound.play();
 
 
@@ -105,6 +195,7 @@ gameGrid.addEventListener('click', (event) => {
                         notificationBanner.innerHTML = ttt.winner;
                         populatePrevResults();
                         enableFieldsAndButtons();
+                        showWinningMove();
                     } else {
                         //Otherwise, next player's turn
                         notificationBanner.innerHTML = `${ttt.currentPlayer.name}'s turn`;
@@ -142,11 +233,12 @@ newGameBtn.addEventListener('click', () => {
         currItem.innerHTML = '';
         currItem.classList.remove('x');
         currItem.classList.remove('o');
+        currItem.classList.remove('fade');
     });
 
     //"turn on" game grid by adding animation and sound
     ggZapSound.play();
-    gameGrid.classList.add('turned-on');
+    gameGrid.classList.add('turn-on');
     
     //Reset notification section to initial state
     notificationBanner.innerHTML = `Press New Game to Start`;

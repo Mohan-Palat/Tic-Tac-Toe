@@ -53,7 +53,7 @@ ul {
     margin: 50px;
 }
 
-.turned-on {
+.turn-on {
     animation-name: gridFlicker;
     animation-duration: .3s;
     animation-timing-function: ease-in;
@@ -61,6 +61,7 @@ ul {
     animation-iteration-count: 3;
     animation-fill-mode: both;
 }
+
 
 .box {
     background-color: black;
@@ -117,6 +118,11 @@ ul {
     font-family: 'Nunito', sans-serif;
     color: rgb(241, 245, 241);
     text-shadow: 0 0 5px rgb(164, 244, 164), 0 0 10px rgb(157, 244, 157), 0 0 15px rgb(140, 245, 140), 0 0 20px rgb(122, 244, 122), 0 0 30px rgb(101, 245, 101);
+}
+
+.fade {
+    color: rgb(26, 22, 26);
+    text-shadow: none;
 }
 
 

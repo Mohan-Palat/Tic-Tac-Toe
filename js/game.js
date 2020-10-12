@@ -37,6 +37,7 @@ class Game {
         }
     }
     
+    //Alternate between players 
     switchTurns () {
         if (this.currentPlayer === this.players[0]) {
             this.currentPlayer = this.players[1];
@@ -60,8 +61,6 @@ class Game {
             this.winner = `${this.currentPlayer.customOperatorID} won!!`;
             this.gameOn = false;
             this.previousGameResults.push(this.players);
-            // console.log("prev results array ");
-            // console.log(this.previousGameResults);
         
         //Game is a draw if no winner at the end
         } else if (this.turn === 9) {
@@ -188,7 +187,7 @@ class Game {
         //Incrememnt players turn
         this.turn++;
 
-        //Determine winner if 
+        //Determine winner if at least 5 player turns occurred
         if (this.turn >= 5) {
             this.determineWinner();
         }
