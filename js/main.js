@@ -20,6 +20,9 @@ const p1Name = document.querySelector('#p1-name');
 const p2CustomChar = document.querySelector('#p2-char');
 const p2Name = document.querySelector('#p2-name');
 
+//Find sounds
+const ggZapSound = document.querySelector('#gg-zap-sound');
+const xoSound = document.querySelector('#xo-sound');
 
 //Enable input fields and buttons so user can interact with UI
 function enableFieldsAndButtons() {
@@ -33,6 +36,7 @@ function disbaleFieldsAndButtons() {
     p1CustomChar.disabled = true;
 }
 
+//This will kepp track of previous game results
 function populatePrevResults() {
     
     //Create a new li node
@@ -90,6 +94,8 @@ gameGrid.addEventListener('click', (event) => {
                     currItem.classList.add(ttt.currentPlayer.gameOperatorID.toLowerCase());
 
                     currItem.classList.add('xFlicker');
+                    xoSound.play();
+
 
                     //Update score
                     ttt.updateScore(ttt.currentPlayer.gameOperatorID, selectedBox);
@@ -138,7 +144,8 @@ newGameBtn.addEventListener('click', () => {
         currItem.classList.remove('o');
     });
 
-    //"turn on" game grid by adding animation class
+    //"turn on" game grid by adding animation and sound
+    ggZapSound.play();
     gameGrid.classList.add('turned-on');
     
     //Reset notification section to initial state
