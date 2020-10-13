@@ -1,5 +1,3 @@
-console.log("JS linked");
-
 
 //Find the game grid and game boxes
 const gameGrid = document.querySelector('.game-grid');
@@ -8,7 +6,7 @@ const gameBox = document.querySelectorAll('.box');
 //Find 'new game' button
 const newGameBtn = document.querySelector('#new-game');
 
-//Find notification section 
+//Find notification section - NOT USED
 const notificationBanner = document.querySelector('#notification');
 
 //Find previous results list
@@ -16,18 +14,17 @@ const prevResults = document.querySelector('.previous-results');
 
 //Find player customized inputs
 const p1CustomChar = document.querySelector('#p1-char');
-const p1Name = document.querySelector('#p1-name');
+const p1Name = document.querySelector('#p1-name');  // - NOT USED
 const p2CustomChar = document.querySelector('#p2-char');
-const p2Name = document.querySelector('#p2-name');
+const p2Name = document.querySelector('#p2-name');  // - NOT USED
 
 //Find sounds
 const ggZapSound = document.querySelector('#gg-zap-sound');
 const xoSound = document.querySelector('#xo-sound');
 
+//This will reset the notification button
 function updateNotificationBtn () {
     newGameBtn.innerHTML = ttt.winner;
-    // const resetPlayBtn = setInterval(function(){ newGameBtn.innerHTML = 'Press to Play'; }, 3000);
-    // clearInterval(resetPlayBtn);
     setTimeout(function(){ newGameBtn.innerHTML = 'Press to Play'; }, 3000);   
 };
 
@@ -145,12 +142,12 @@ function populatePrevResults() {
     const newResultsNode = document.createElement("li");
     
     //Value the contents of the li
-    newResultsNode.innerHTML =  `Game ${ttt.gameCounter}:   ${ttt.players[0].customOperatorID} vs ${ttt.players[1].customOperatorID}  ---> ${ttt.winner}`;
+    newResultsNode.innerHTML =  `Game ${ttt.gameCounter}:   ${ttt.players[0].customOperatorID} vs ${ttt.players[1].customOperatorID}  &#8594; ${ttt.winner}`;
 
     //Set the class of the li
     newResultsNode.className = "result";
     
-    //Apply styling based on who won
+    //Apply styling based odd or even rows
     if ((ttt.gameCounter % 2) === 0 ) {
         newResultsNode.classList.add("even");
     } else {
@@ -163,7 +160,6 @@ function populatePrevResults() {
     
     //Limit previous game rows so remove the oldest
     if (prevResults.childElementCount >= 6) {    
-        console.log("in remove logic" + prevResults.lastChild);
         prevResults.removeChild(prevResults.lastChild);
     };
 }

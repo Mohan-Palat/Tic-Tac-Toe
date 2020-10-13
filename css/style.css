@@ -42,9 +42,9 @@ section {
 
 ul {
     list-style-type: none; 
-    padding: 5; 
+    padding: 1; 
     margin: 0; 
-    height: 200px;
+    height: 215px;
     border-style: solid;
     border-radius: 10px;
     border-color: rgb(211, 225, 247);
@@ -129,7 +129,7 @@ button:hover {
 } */
 
 .result {   /*JS creation*/
-    font-size: 20px;
+    font-size: 25px;
 }
 
 .x, .even, h2 {
