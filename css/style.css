@@ -25,12 +25,12 @@ h2 {
 
 aside {
     width: 500px;
-    background-color: rgb(56, 221, 233);
+    background-color: black;
+    color: white;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
-    padding-left: 20px;
-
+    padding-left: 30px;
 }
 
 section {
@@ -40,8 +40,38 @@ section {
 
 ul {
     list-style-type: none; 
-    padding: 0; 
+    padding: 5; 
     margin: 0; 
+    height: 200px;
+    border-style: solid;
+    border-radius: 10px;
+    border-color: orange;
+    
+}
+
+button {
+    font-family: 'Nunito', sans-serif;
+    background:  black;
+    color: rgb(248, 230, 239);
+    text-shadow: 0 0 5px rgb(250, 178, 214), 0 0 10px rgb(248, 152, 200), 0 0 15px rgb(247, 109, 178), 0 0 20px rgb(250, 90, 168), 0 0 30px rgb(250, 60, 152);
+    font-size: 50px;
+    border: none;
+    border-radius: 8px;
+}
+
+button:hover {
+    color:  rgb(69, 17, 154);
+    background:  rgb(69, 17, 154);
+    box-shadow: 0 0 10px rgb(69, 17, 154), 0 0 40px rgb(69, 17, 154), 0 0 80px  rgb(69, 17, 154);
+}
+
+.user-inputs {
+    font-family: 'Warnes', cursive;
+    font-size: 30px;
+}
+
+.disableHover {
+    pointer-events: none;
 }
 
 .game-grid {
@@ -55,7 +85,7 @@ ul {
 
 .turn-on {
     animation-name: gridFlicker;
-    animation-duration: .3s;
+    animation-duration: .2s;
     animation-timing-function: ease-in;
     animation-delay: .01s;
     animation-iteration-count: 3;
@@ -65,8 +95,6 @@ ul {
 
 .box {
     background-color: black;
-    /* border: 10px solid rgba(0, 0, 0, 0.8); */
-    /* padding: 25px 0 0 0; */
     font-size: 150px;
     text-align: center;
     width: 194px;
@@ -121,24 +149,52 @@ ul {
 }
 
 .fade {
-    color: rgb(26, 22, 26);
+    color: rgba(52, 46, 52, 0.4);
     text-shadow: none;
+    /* opacity: 0.4;  Needed for emojis */
 }
 
 
 #notification {
     margin-top: 10px;
-    font-size: 40px;
+    font-size: 30px;
+    font-family: 'Warnes', cursive;
+    color: rgb(248, 230, 239);
+    text-shadow: 0 0 5px rgb(250, 178, 214), 0 0 10px rgb(248, 152, 200), 0 0 15px rgb(247, 109, 178), 0 0 20px rgb(250, 90, 168), 0 0 30px rgb(250, 60, 152);
 }
 
-#new-game {
+/* #new-game {
     width: 100px;
+} */
+
+#p1-char {
+    font-family: 'Nunito', sans-serif;
+    text-transform: uppercase;
+    width: 40px;
+    background-color: black;
+    padding-left: 15px;
+    height: 40px;
+    color: white;
+    font-size: larger;
+    border: rgb(158, 190, 241);
+    border-style: solid;
+    border-radius: 8px;
 }
 
-#p1-char, #p2-char{
+#p2-char {
+    font-family: 'Nunito', sans-serif;
     text-transform: uppercase;
-    width: 20px;
+    width: 40px;
+    background-color: black;
+    padding-left: 15px;
+    height: 40px;
+    color: white;
+    font-size: larger;
+    border: rgb(165, 243, 165);
+    border-style: solid;
+    border-radius: 8px;
 }
+
 
 @keyframes gridFlicker {
     from {background-color: rgb(26, 22, 26);}

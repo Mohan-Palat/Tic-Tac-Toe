@@ -24,16 +24,28 @@ const p2Name = document.querySelector('#p2-name');
 const ggZapSound = document.querySelector('#gg-zap-sound');
 const xoSound = document.querySelector('#xo-sound');
 
+function updateNotificationBtn () {
+    newGameBtn.innerHTML = ttt.winner;
+    // const resetPlayBtn = setInterval(function(){ newGameBtn.innerHTML = 'Press to Play'; }, 3000);
+    // clearInterval(resetPlayBtn);
+    setTimeout(function(){ newGameBtn.innerHTML = 'Press to Play'; }, 3000);   
+};
+
 //Enable input fields and buttons so user can interact with UI
 function enableFieldsAndButtons() {
     newGameBtn.disabled = false;
+    newGameBtn.classList.remove("disableHover");
     p1CustomChar.disabled = false;
+    p2CustomChar.disabled = false;
 }
 
 //Disable input fields and buttons
 function disbaleFieldsAndButtons() {
     newGameBtn.disabled = true;
+    newGameBtn.classList.add("disableHover");
     p1CustomChar.disabled = true;
+    p2CustomChar.disabled = true;
+
 }
 
 //This will "turn off" all other X and Os to highlight the winning move.
@@ -141,8 +153,8 @@ function populatePrevResults() {
     //Append the most recent game results to the top of the list
     prevResults.insertBefore(newResultsNode, prevResults.firstChild);    
     
-    //Only allow 10 previous game rows so remove the oldest
-    if (prevResults.childElementCount >= 5) {    
+    //Limit previous game rows so remove the oldest
+    if (prevResults.childElementCount >= 6) {    
         console.log("in remove logic" + prevResults.lastChild);
         prevResults.removeChild(prevResults.lastChild);
     };
@@ -192,13 +204,13 @@ gameGrid.addEventListener('click', (event) => {
                     
                     //If the game is over, show result and enable buttons and input fields
                     if (!ttt.gameOn) {
-                        notificationBanner.innerHTML = ttt.winner;
+                        updateNotificationBtn ();
                         populatePrevResults();
                         enableFieldsAndButtons();
                         showWinningMove();
                     } else {
                         //Otherwise, next player's turn
-                        notificationBanner.innerHTML = `${ttt.currentPlayer.name}'s turn`;
+                        newGameBtn.innerHTML = `${ttt.currentPlayer.name}'s turn`;
                     
                     }
                 }
@@ -221,12 +233,12 @@ newGameBtn.addEventListener('click', () => {
         p2.updateCustOperID(p2CustomChar.value);
     }
     
-    if (p1Name !== undefined) {
-        p1.updateName(p1Name.value);
-    }
-    if (p2Name !== undefined) {
-        p2.updateName(p2Name.value);
-    }
+    // if (p1Name !== undefined) {
+    //     p1.updateName(p1Name.value);
+    // }
+    // if (p2Name !== undefined) {
+    //     p2.updateName(p2Name.value);
+    // }
     
     //Reset game grid to initial state
     gameBox.forEach((currItem, index) => {
@@ -240,8 +252,8 @@ newGameBtn.addEventListener('click', () => {
     ggZapSound.play();
     gameGrid.classList.add('turn-on');
     
-    //Reset notification section to initial state
-    notificationBanner.innerHTML = `Press New Game to Start`;
+    //Reset notification to first player's turn
+    newGameBtn.innerHTML = `${ttt.currentPlayer.name}'s turn`;
     
     //Disable game buttons and input fields while game is running
     disbaleFieldsAndButtons();

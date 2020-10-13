@@ -19,28 +19,21 @@
     <header>Neon Tic Tac Toe</header>
     <main>
         <aside>
-            <div>
-                <label for="p1-name">Player 1 name</label>
-                <input type="text" id="p1-name" maxlength="15" value="Player 1"><br>
-                <label for="p1-char">Player 1 character</label>
+            <div class="user-inputs">
+                <!-- <label for="p1-name">Player 1 name</label>
+                <input type="text" id="p1-name" maxlength="15" value="Player 1"><br> -->
+                <label class="x" for="p1-char">Player 1</label>
                 <input type="text" id="p1-char" maxlength="10" value="X">
             </div>
-            <div>
-                <label for="p2-name">Player 2 name</label>
-                <input type="text" id="p2-name" maxlength="15" value="Player 2"><br>
-                <label for="p2-char">Player 2 character</label>
+            <div class="user-inputs">
+                <!-- <label for="p2-name">Player 2 name</label>
+                <input type="text" id="p2-name" maxlength="15" value="Player 2"><br> -->
+                <label class="o" for="p2-char">Player 2</label>
                 <input type="text" id="p2-char" maxlength="10" value="O">
             </div>
-            
-            <button class="btn" id="new-game">Play!</button>
-            <div id="notification">Press New Game to Start</div>
+            <button class="btn" id="new-game">Press to Play</button>
+            <!-- <div id="notification">Press Play to Start</div> -->
             <div class="statistics">
-                <!-- <h2>Counters</h2>
-                <div class="counters">
-                    <div class="Wins">Wins: </div>
-                    <div class="Loses">Loses: </div>
-                    <div class="Draws">Draws: </div>
-                </div> -->
                 <h2>Previous Game Results</h2>
                 <ul class="previous-results">
                 </ul>
