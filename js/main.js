@@ -145,13 +145,21 @@ function populatePrevResults() {
     const newResultsNode = document.createElement("li");
     
     //Value the contents of the li
-    newResultsNode.innerHTML =  `Game ${ttt.gameCounter}:   ${ttt.players[0].customOperatorID} vs ${ttt.players[1].customOperatorID}  -> ${ttt.winner}`;
+    newResultsNode.innerHTML =  `Game ${ttt.gameCounter}:   ${ttt.players[0].customOperatorID} vs ${ttt.players[1].customOperatorID}  ---> ${ttt.winner}`;
 
     //Set the class of the li
     newResultsNode.className = "result";
     
+    //Apply styling based on who won
+    if ((ttt.gameCounter % 2) === 0 ) {
+        newResultsNode.classList.add("even");
+    } else {
+        newResultsNode.classList.add("odd");
+    }
+
     //Append the most recent game results to the top of the list
-    prevResults.insertBefore(newResultsNode, prevResults.firstChild);    
+    prevResults.insertBefore(newResultsNode, prevResults.firstChild);
+    
     
     //Limit previous game rows so remove the oldest
     if (prevResults.childElementCount >= 6) {    
