@@ -42,7 +42,7 @@ You can also host or modify your own instance by forking and cloning this reposi
 
 ## Application design
 
-The application consists of two classes, game (game.js) and player (player.js).  The game class handles all of the game mechanics such as adding players, alternating turns, and scoring.  The player class hold the player data including customized tokens.
+The application consists of two classes, game (game.js) and player (player.js).  The game class handles all of the game mechanics such as adding players, alternating turns, and scoring.  The player class is for basic player xdata including customized tokens.
 
 The main.js file manages the UI dynamics along with class interactions.
 
@@ -75,8 +75,8 @@ It's important to note that 'X' and 'O' are used behind the scenes for scoring e
 
 
  # Future Improvements
- - Provide an easier what to select emojis rather than copy/paste from another window/site.
- - Incorporate more user feedback using sound and visual effects (e.g, audio indicator when game is over, win vs draw, etc).
+ - Provide an easier way to select emojis rather than copy/paste from another window/site.
+ - Incorporate more feedback to players using sound and visual effects (e.g, audio indicator when game is over, win vs draw, etc).
  - Incorporate media queries for proper formatting on mobile devices.
  - AI competitor
  - Use persistence to allow uninterrupted play after page refreshes or connectivity loss. 
